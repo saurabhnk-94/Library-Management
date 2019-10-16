@@ -4,6 +4,7 @@ from django import forms
 
 from .models import *
 
+
 class AuthorAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AuthorAdminForm, self).__init__(*args, **kwargs)
@@ -15,7 +16,7 @@ class AuthorAdminForm(forms.ModelForm):
         return self.cleaned_data
 
     def save(self, commit=True):
-        return super(BookAdminForm, self).save(commit=commit)
+        return super(AuthorAdminForm, self).save(commit=commit)
 
 
 class AuthorAdmin(admin.ModelAdmin):
