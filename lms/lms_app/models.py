@@ -1,7 +1,7 @@
 from django.db import models
-from datetime import datetime,timedelta,date
+from datetime import datetime, timedelta, date
 from django.dispatch import receiver
-from django.db.models.signals import pre_save,post_save
+from django.db.models.signals import pre_save, post_save
 
 class Library(models.Model):
     name = models.CharField(max_length=50)
@@ -103,7 +103,6 @@ class Record(models.Model):
                 return "No fine"
 
 
-
 @receiver(post_save,sender=Record)
 def decrement_stock(sender,instance,created,**kwargs):
     book = instance.book
@@ -113,21 +112,31 @@ def decrement_stock(sender,instance,created,**kwargs):
             if book.available_stock == 0:
                 book.available = False
         book.save()
-
-
-@receiver(pre_save,sender=Record)
-def increment_stock(sender,instance,**kwargs):
-    if not instance.returned:
-        if any(Record.objects.filter(id=instance.id)):
-            if Record.objects.get(id=instance.id).returned == True:
-                instance.returned = True
     else:
-        if Record.objects.get(id=instance.id).returned == False:
+        if not instance.returned:
+            if any(Record.objects.filter(id=instance.id)):
+                if Record.objects.get(id=instance.id).returned == True:
+                    instance.returned = True
+        else:
             book = instance.book
             book.available_stock = book.available_stock + 1
             if book.available_stock > 0:
                 book.available = True
             book.save()
+
+# @receiver(pre_save,sender=Record)
+# def increment_stock(sender,instance,**kwargs):
+#     if not instance.returned:
+#         if any(Record.objects.filter(id=instance.id)):
+#             if Record.objects.get(id=instance.id).returned == True:
+#                 instance.returned = True
+#     else:
+#         if Record.objects.get(id=instance.id).returned == False:
+#             book = instance.book
+#             book.available_stock = book.available_stock + 1
+#             if book.available_stock > 0:
+#                 book.available = True
+#             book.save()
 
 
 @receiver(post_save, sender=Record)
@@ -139,21 +148,25 @@ def decrement_total_books(sender,instance,created,**kwargs):
                 member.book_count -= 1
             member.save()
 
-
-@receiver(pre_save,sender=Record)
-def increment_total_books(sender,instance,**kwargs):
-    if not instance.returned:
-        if any(Record.objects.filter(id=instance.id)):
-            if Record.objects.get(id=instance.id).returned == True:
-                instance.returned = True
-    else:
-        if Record.objects.get(id=instance.id).returned == False:
-            member = instance.member
-            member.book_count += 1
-            member.save()
+    elif instance.returned == True:
+        member.book_count += 1
+        member.save()
 
 
-
+# @receiver(pre_save,sender=Record)
+# def increment_total_books(sender,instance,**kwargs):
+#     if not instance.returned:
+#         if any(Record.objects.filter(id=instance.id)):
+#             if Record.objects.get(id=instance.id).returned == True:
+#                 instance.returned = True
+#     else:
+#         if Record.objects.get(id=instance.id).returned == False:
+#             member = instance.member
+#             member.book_count += 1
+#             member.save()
+#
+#
+#
 
 
 
