@@ -117,12 +117,12 @@ def decrement_stock(sender,instance,created,**kwargs):
             if any(Record.objects.filter(id=instance.id)):
                 if Record.objects.get(id=instance.id).returned == True:
                     instance.returned = True
-        else:
-            book = instance.book
-            book.available_stock = book.available_stock + 1
-            if book.available_stock > 0:
-                book.available = True
-            book.save()
+
+        # book = instance.book
+        book.available_stock = book.available_stock + 1
+        if book.available_stock > 0:
+            book.available = True
+        book.save()
 
 # @receiver(pre_save,sender=Record)
 # def increment_stock(sender,instance,**kwargs):
