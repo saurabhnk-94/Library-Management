@@ -14,4 +14,46 @@ In this app there are multiple libraries. In each library there are multiple lib
  ```
  git clone https://github.com/saurabhnk-94/django-.git
  ```
+ Get inside the repo, type this is terminal:
+ ```
+ cd django-
+ ```
+ Create a virtual environment inside the repo:
+ ```
+ python3 -m venv .venv
+ ```
+ After that activate the virtual environment by typing:
+ ```
+ source .venv/bin/activate
+ ```
+ Next step is to install all the dependencies into your virtual environment:
+ ```
+ pip3 install -r requirement.txt
+ ```
+ Next get into the project directory by typing:
+ ```
+ cd lms
+ ```
+ Type 3 commands in order before for the project to run:
+ ```
+ python3 manage.py makemigrations
+ python3 manage.py migrate
+ ```
+ Now to access the admin page before running the server create a superuser:
+ ```
+ python3 manage.py createsuperuser
+ fill the details :
+ username: <ur choice>
+ email: <optional>
+ password: <password>
+ confirm password: <confirm the password>
+ ```
+ After filling all these to run the project:
+ ```
+ python3 manage.py runserver
+ ```
+ 
+ This is just the admin page functionality project.
+ 
+ I hope this project was bit beneficial for you references.
  
