@@ -28,7 +28,9 @@ In this app there are multiple libraries. In each library there are multiple lib
  ```
  Next step is to install all the dependencies into your virtual environment:
  ```
- pip3 install -r requirement.txt
+ pip3 install 
+Django==3.0.1
+django-jsonfield==1.4.0
  ```
  Next get into the project directory by typing:
  ```
