@@ -12,11 +12,11 @@ In this app there are multiple libraries. In each library there are multiple lib
  
  Clone this repo in your system:
  ```
- git clone https://github.com/saurabhnk-94/django-.git
+ git clone https://github.com/saurabhnk-94/Library-Management-.git
  ```
  Get inside the repo, type this is terminal:
  ```
- cd django-
+ cd Library-Management
  ```
  Create a virtual environment inside the repo:
  ```
